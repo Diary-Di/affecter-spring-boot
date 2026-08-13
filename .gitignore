@@ -1,0 +1,66 @@
+### Compiled class files
+*.class
+
+### Log files
+*.log
+
+### Package files
+*.jar
+*.war
+*.ear
+
+### Maven
+/target/
+dependency-reduced-pom.xml
+buildNumber.properties
+release.properties
+pom.xml.tag
+pom.xml.versionsBackup
+pom.xml.releaseBackup
+.mvn/repository/
+
+### IDEs and editors
+.idea/
+*.iml
+*.iws
+.vscode/
+/.classpath
+/.project
+/.settings/
+out/
+
+### NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+dist/
+
+### macOS
+.DS_Store
+
+### Windows
+Thumbs.db
+
+### Temporary and swap files
+*~
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
+
+### Environment
+.env
+.env.local
+
+### Other
+/target/
+/generated-sources/
+/generated-test-sources/
+
+# Maven wrapper files - keep the wrapper script but ignore the binary artifact if present
+.mvn/wrapper/maven-wrapper.jar
+
+### Application credentials (kept out of VCS)
+/src/main/resources/credentials/
+
