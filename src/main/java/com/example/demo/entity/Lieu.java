@@ -1,7 +1,10 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -40,4 +43,15 @@ public class Lieu {
     public void setProvince(String province) {
         this.province = province;
     }
+
+    @OneToMany(mappedBy = "lieu")
+private List<Affecter> affectations;
+
+public List<Affecter> getAffectations() {
+    return affectations;
+}
+
+public void setAffectations(List<Affecter> affectations) {
+    this.affectations = affectations;
+}
 }
