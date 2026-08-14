@@ -7,9 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.AffecterRequest;
 import com.example.demo.entity.Affecter;
 import com.example.demo.entity.AffecterId;
 import com.example.demo.service.AffecterService;
@@ -42,6 +45,13 @@ public class AffecterController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @PostMapping
+public Affecter createAffectation(
+        @RequestBody AffecterRequest request) {
+
+    return affecterService.createAffectation(request);
+}
 
     @DeleteMapping("/{codeemp}/{codelieu}/{date}")
     public ResponseEntity<Void> deleteAffectation(

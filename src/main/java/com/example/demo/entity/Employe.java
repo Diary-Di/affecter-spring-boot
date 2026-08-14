@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -54,6 +56,7 @@ public class Employe {
     }
 
     @OneToMany(mappedBy = "employe")
+@JsonIgnore
 private List<Affecter> affectations;
 
 public List<Affecter> getAffectations() {

@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "lieu")
@@ -45,6 +46,7 @@ public class Lieu {
     }
 
     @OneToMany(mappedBy = "lieu")
+@JsonIgnore
 private List<Affecter> affectations;
 
 public List<Affecter> getAffectations() {
