@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.AffecterRequest;
 import com.example.demo.entity.Affecter;
@@ -70,6 +71,58 @@ public class AffecterService {
 
         return affecterRepository.save(affecter);
     }
+
+    @Transactional
+public Affecter updateAffectation(
+        AffecterId oldId,
+        AffecterRequest request) {
+
+    // 1. Check that the old affectation exists
+    Affecter oldAffectation = affecterRepository
+            .findById(oldId)
+            .orElseThrow(() ->
+                    new RuntimeException("Affectation not found"));
+
+    // 2. Check that the employee exists
+    Employe employe = employeRepository
+            .findById(request.getCodeemp())
+            .orElseThrow(() ->
+                    new RuntimeException("Employee not found"));
+
+    // 3. Check that the location exists
+    Lieu lieu = lieuRepository
+            .findById(request.getCodelieu())
+            .orElseThrow(() ->
+                    new RuntimeException("Location not found"));
+
+    // 4. Build the new composite ID
+    AffecterId newId = new AffecterId(
+            request.getCodeemp(),
+            request.getCodelieu(),
+            request.getDateAffecter()
+    );
+
+    // 5. Make sure the new ID isn't already used
+    if (!oldId.equals(newId)
+            && affecterRepository.existsById(newId)) {
+
+        throw new RuntimeException(
+                "The new affectation already exists");
+    }
+
+    // 6. Delete the old record
+    affecterRepository.delete(oldAffectation);
+
+    // 7. Create the new record
+    Affecter newAffectation = new Affecter();
+
+    newAffectation.setId(newId);
+    newAffectation.setEmploye(employe);
+    newAffectation.setLieu(lieu);
+
+    // 8. Save the new record
+    return affecterRepository.save(newAffectation);
+}
 
     public void deleteAffectation(AffecterId id) {
         affecterRepository.deleteById(id);
